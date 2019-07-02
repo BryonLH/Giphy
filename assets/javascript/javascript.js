@@ -20,7 +20,7 @@ function renderButtons() {
             console.log(response);
             console.log(response.data.data);
             var results = response.data.data;
-            // var animationState = "still";
+            var animationState = "still";
             // for (var i = 0;i < response.length; i++) {
             results.forEach(function (gif) {
                 if (gif.rating !== "r") {
@@ -39,17 +39,17 @@ function renderButtons() {
                 };
             });
 
-        // $("#gif").on("click", function () {
-        //     var animationState = $(this).attr("data-state");
-        //     if (state === "still") {
-        //         $(this).atr("src", $(this).attr("data-animate"));
-        //         $(this).attr("data-state", "animate");
-        //     } else {
-        //         $(this).atr("src", $(this).attr("data-still"));
-        //         $(this).attr("data-state", "still");
+            // $("#gif").on("click", function () {
+            //     var animationState = $(this).attr("data-state");
+            //     if (state === "still") {
+            //         $(this).atr("src", $(this).attr("data-animate"));
+            //         $(this).attr("data-state", "animate");
+            //     } else {
+            //         $(this).atr("src", $(this).attr("data-still"));
+            //         $(this).attr("data-state", "still");
             // };
         });
-});
+    });
 }
 
 
@@ -67,31 +67,3 @@ $("#submit").on("click", function (event) {
 renderButtons();
 
 
-// function to handle displaying the GIFs when a button is clicked
-// $(".gif-button").on("click", function () {
-//     var character = $(this).attr("data-character");
-//     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + giphyAPIKey + "&q=" + character + "+disney&limit=10&lang=en";
-//     axios({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         console.log(response);
-//         console.log(response.data.data);
-//         var results = response.data.data;
-//         // for (var i = 0;i < response.length; i++) {
-//         results.forEach(function (gif) {
-//             if (gif.rating !== "r") {
-//                 var gifDiv = $("<div class='gif-div'>");
-//                 var rating = gif.rating;
-//                 console.log(rating);
-//                 var p = $("<p class='rating'>").text("Rating: " + rating);
-//                 var characterImage = $("<img>");
-//                 characterImage.attr("src", gif.images.fixed_height.url);
-//                 gifDiv.prepend(p);
-//                 gifDiv.prepend(characterImage);
-//                 $("#gif-section").prepend(gifDiv);
-//             };
-//         });
-//     });
-
-// });
