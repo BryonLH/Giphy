@@ -20,38 +20,42 @@ function renderButtons() {
             console.log(response);
             console.log(response.data.data);
             var results = response.data.data;
-            var animationState = "still";
+            // var animationState = "still";
             // for (var i = 0;i < response.length; i++) {
             results.forEach(function (gif) {
                 if (gif.rating !== "r") {
-                    var gifDiv = $("<div class='gif-div'>");
-                    var rating = gif.rating;
                     var characterStillImage = gif.images.fixed_height_still.url;
-                    // var characterAnimatedImage = gif.images.fixed_height.url;
+                    var characterAnimatedImage = gif.images.fixed_height.url;
+                    var rating = gif.rating;
+                    console.log(characterStillImage);
+                    console.log(characterAnimatedImage);
+                    var gifDiv = `<div class = 'gif-div'><div>Rating: ${rating}</div><img class='gif' src="${characterStillImage}" data-still="${characterStillImage}" data-animate = "${characterAnimatedImage}" data-state = 'still'/></div>`;
+                    console.log(gifDiv);
+
 
                     console.log(rating);
-                    var p = $("<p class='rating'>").text("Rating: " + rating);
-                    var characterStillImage = $("<img id='gif'>");
-                    characterStillImage.attr("src", gif.images.fixed_height_still.url);
-                    gifDiv.prepend(p);
-                    gifDiv.prepend(characterStillImage);
+                    // var p = $("<p class='rating'>").text("Rating: " + rating);
+                    // var characterStillImage = $("<img id='gif'>");
+                    // characterStillImage.attr("src", gif.images.fixed_height_still.url);
+                    // gifDiv.prepend();
+                    // gifDiv.prepend(characterStillImage);
                     $("#gif-section").prepend(gifDiv);
                 };
+                $(".gif").on("click", function () {
+                    var state = $(this).attr("data-state");
+                    console.log(state);
+                    if (state === "still") {
+                        $(this).attr("src", $(this).attr("data-animate"));
+                        $(this).attr("data-state", "animate");
+                    } else {
+                        $(this).attr("src", $(this).attr("data-still"));
+                        $(this).attr("data-state", "still");
+                    };
+                });
             });
-
-            // $("#gif").on("click", function () {
-            //     var animationState = $(this).attr("data-state");
-            //     if (state === "still") {
-            //         $(this).atr("src", $(this).attr("data-animate"));
-            //         $(this).attr("data-state", "animate");
-            //     } else {
-            //         $(this).atr("src", $(this).attr("data-still"));
-            //         $(this).attr("data-state", "still");
-            // };
         });
-    });
+    })
 }
-
 
 // This function handles events where one button is clicked
 $("#submit").on("click", function (event) {
@@ -62,6 +66,7 @@ $("#submit").on("click", function (event) {
     $("#buttons").empty();
     renderButtons();
 });
+
 
 
 renderButtons();
